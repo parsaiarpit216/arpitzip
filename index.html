@@ -1,24 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Page</title>
-    <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }
-        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
-        .btn { background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .btn:hover { background-color: #0056b3; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arpit | Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #0b0f1a;
+      --bg-soft: #10192b;
+      --card: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #e7ecff;
+      --muted: #b9c2e6;
+      --accent: #7c5cff;
+      --accent-2: #23d5ab;
+      --shadow: 0 18px 60px rgba(7, 12, 28, 0.45);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, #202a44 0%, transparent 60%),
+        radial-gradient(1000px 500px at 80% 0%, #1f2a52 0%, transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(18px);
+      background: rgba(11, 15, 26, 0.7);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 96px 0 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(124, 92, 255, 0.18);
+      color: #d8d2ff;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 3vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #9e8dff);
+      color: #0b0f1a;
+      box-shadow: 0 10px 30px rgba(124, 92, 255, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+    }
+
+    section {
+      padding: 64px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(35, 213, 171, 0.15);
+      color: #b8f6e7;
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+
+    .project-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      border-left: 2px solid rgba(255, 255, 255, 0.15);
+      padding-left: 18px;
+    }
+
+    .timeline-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 32px 0 48px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="card">
-        <h1>Project Files</h1>
-        <p>Click the button below to download the resources.</p>
-        <br>
-        <a href="downloads.zip" download class="btn">Download ZIP File</a>
+  <header>
+    <div class="container nav">
+      <div class="logo">Arpit - Portfolio</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
+  <main>
+    <section class="container hero" id="home">
+      <div>
+        <div class="badge">Available for freelance - 2026</div>
+        <h1>Hi, I'm Arpit - a full-stack developer building elegant digital products.</h1>
+        <p>
+          I design and engineer modern web experiences with a focus on performance, accessibility, and delightful UX.
+          From rapid prototypes to production-ready apps, I help teams turn ideas into lovable products.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-outline" href="downloads.zip" download>Download CV</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>5+ Years</strong>
+            Building web platforms
+          </div>
+          <div class="stat">
+            <strong>30+ Projects</strong>
+            Shipped end-to-end
+          </div>
+          <div class="stat">
+            <strong>12 Awards</strong>
+            Product & design
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>What I do</h2>
+        <p class="section-subtitle">
+          End-to-end product development, from strategy to launch. I blend design thinking with engineering excellence.
+        </p>
+        <ul class="list">
+          <li>Product strategy and MVP validation</li>
+          <li>High-performance frontend engineering</li>
+          <li>Secure, scalable backend services</li>
+          <li>UI design systems and brand identity</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container" id="about">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        I'm a developer who loves crafting human-centered experiences. I collaborate with founders and teams to build
+        products that are both beautiful and reliable.
+      </p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Mission</h3>
+          <p>
+            Create impactful software that feels effortless to use, while maintaining clean architecture and long-term
+            scalability.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Values</h3>
+          <ul class="list">
+            <li>Craftsmanship over shortcuts</li>
+            <li>Collaboration and transparency</li>
+            <li>Continuous learning & mentorship</li>
+            <li>Design with empathy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="skills">
+      <h2 class="section-title">Core Skills</h2>
+      <p class="section-subtitle">
+        A balanced toolkit across design, frontend, and backend stacks.
+      </p>
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="tag">Frontend</span>
+          <h3>Web Experiences</h3>
+          <ul class="list">
+            <li>React, Next.js, TypeScript</li>
+            <li>Responsive UI systems</li>
+            <li>Performance tuning</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Backend</span>
+          <h3>Scalable Services</h3>
+          <ul class="list">
+            <li>Node.js, Express, REST</li>
+            <li>PostgreSQL, Redis</li>
+            <li>Cloud deployment</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">Product</span>
+          <h3>Product Craft</h3>
+          <ul class="list">
+            <li>Design systems</li>
+            <li>User research & analytics</li>
+            <li>Product strategy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="projects">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        A few highlights that showcase my design and engineering range.
+      </p>
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="tag">SaaS Platform</span>
+          <div class="project-title">Nova Analytics</div>
+          <p>
+            A real-time dashboard for enterprise teams, reducing decision time by 45% and streamlining KPI tracking.
+          </p>
+        </div>
+        <div class="card">
+          <span class="tag">Fintech</span>
+          <div class="project-title">Pulse Wallet</div>
+          <p>
+            A mobile-first banking experience with smart insights, instant transfers, and delightful onboarding flows.
+          </p>
+        </div>
+        <div class="card">
+          <span class="tag">Commerce</span>
+          <div class="project-title">Aurora Market</div>
+          <p>
+            A headless e-commerce storefront optimized for speed, accessibility, and conversion.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="experience">
+      <h2 class="section-title">Experience</h2>
+      <p class="section-subtitle">
+        Recent roles and collaborations with fast-growing teams.
+      </p>
+      <div class="card timeline">
+        <div class="timeline-item">
+          <h3>Lead Product Engineer - Lumen Labs</h3>
+          <span>2023 - Present</span>
+          <p>Led a cross-functional squad to launch a design system and ship 12+ new features.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Senior Frontend Engineer - Brightside Studio</h3>
+          <span>2021 - 2023</span>
+          <p>Built a performance-first UI framework, improving Lighthouse scores to 96+ across products.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Full-Stack Developer - Freelance</h3>
+          <span>2019 - 2021</span>
+          <p>Partnered with founders on MVPs, product strategy, and scalable architecture.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="contact">
+      <h2 class="section-title">Let's Work Together</h2>
+      <p class="section-subtitle">
+        Have a project in mind or want to chat? I'd love to hear from you.
+      </p>
+      <div class="card contact-card">
+        <div class="contact-line">Email: hello@arpit.dev</div>
+        <div class="contact-line">Location: Remote - Worldwide</div>
+        <div class="contact-line">LinkedIn: linkedin.com/in/arpit</div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:hello@arpit.dev">Start a Project</a>
+          <a class="btn btn-outline" href="#home">Back to top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Copyright (c) <span id="year"></span> Arpit. Crafted with care and curiosity.
+    </div>
+  </footer>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
